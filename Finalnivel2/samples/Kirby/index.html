@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width"><!--, user-scalable=no">-->
+	<title>Introducción a los Gráficos 3D</title>
+
+	<!--[if lt IE 9]>
+ 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+ 	<![endif]-->
+
+ 	<script src="./../../../../Libraries/Jquery/jquery-2.1.4.min.js"></script>
+ 	<script src="./../../../../Libraries/ThreeJS-r71/build/three.min.js"></script>
+ 	<script src="./../../../../Libraries/ThreeJSLibs/OrbitControls.js"></script>
+ 	<script src="./../../../../Libraries/ThreeJSLibs/Stats.js"></script>
+ 	<script src="./../../../../Libraries/ThreeJSLibs/threex.dynamictexture.js"></script>
+ 	<script src="./src/utils.js"></script>
+ 	<script src="./src/app.js"></script>
+</head>
+<body>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		iframe{
+			overflow:no-scroll; 
+		}
+	</style>
+	<canvas id="app"></canvas>
+	<script>
+	//Cuando todo esté cargado, ejecuto este bloque
+		$(function(){
+			webGLStart();
+		});
+	</script>
+</body>
+</html>

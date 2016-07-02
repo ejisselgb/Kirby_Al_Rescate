@@ -1,0 +1,54 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#globalWrapper{
+	width: 50%;
+	height: 100%;
+	text-align: center;
+	margin: 10% auto;
+}
+
+form{
+	width:60%;
+	margin: auto auto;
+}
+form input{
+	width:100%;
+	padding: 10px 15px;
+	margin: 5px 0px;
+	font-size: 120%;
+}
+
+form fieldset{
+	padding: 15px;
+	margin-bottom: 10px;
+	text-align: left;
+
+}
+
+.FormTitle{
+	font-size: 140%;
+	padding: 10px;
+}
+
+.hiddenForm{
+	display: none;
+
+}
+.valid{
+	color: green;
+}
+
+.invalid{
+	color:red;
+}
+

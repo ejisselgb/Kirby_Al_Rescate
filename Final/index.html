@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width"><!--, user-scalable=no">-->
+  <title>Kirby Al Rescate</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/form.css">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script src="./../../Libraries/Jquery/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+  
+  <div id="globalWrapper">
+    <div class="form currentForm" data-form="Ingreso">
+      <div class="FormTitle">Kirby Al Rescate</div>
+      <form name="signIn" action="./php_scripts/signIn.php" method="POST" enctype="">
+        <input type="text" name="username" placeholder="username" required>
+        <input type="password" name="password" placeholder="password" required>
+        <input type="submit" value= "Empezar">
+      </form>
+    </div>
+
+    <div class="form hiddenForm" data-form="Registro">
+      <div class="FormTitle">Ayuda A Kirby Registrate!!!</div>
+      <form id="register" autocomplete="off">
+        <input type="text" name="username" placeholder="username" required><div></div>
+        <input type="password" name="password" placeholder="password" required>
+        <input type="submit" value="Empezar">
+      </form>
+    </div>
+
+    <div id="switcher"><span class="switcherText">No estás registrado? </span><span class="switchForm" style="color: darkBlue; cursor:pointer;">Registrate Aquí!</span></div>
+  </div>
+
+  <script>
+
+  $(function(){
+      $("#switcher .switchForm").click(function(){
+        
+        var actualForm = $(".currentForm");
+
+        $(".currentForm").fadeToggle('fast',function(){
+          $(this).removeClass("currentForm");
+
+          $(".hiddenForm").fadeToggle('fast').removeClass("hiddenForm").addClass("currentForm");
+
+          $(this).addClass("hiddenForm");       
+        });
+
+        switch(actualForm.data("form")){
+          case "Registro":
+            $("#switcher .switcherText").html("No estás registrado? ");
+            $("#switcher .switchForm").html("Registrate Aquí!");
+          break;
+          case "Ingreso":
+            $("#switcher .switcherText").html("Ya estás registrado?");
+            $("#switcher .switchForm").html("Volver");
+          break;
+        }
+      });
+      // revisar usuarios
+      $("#register input[name='username']").keyup(function(){
+        var self = $(this);
+        $.ajax({
+          url:"./php_scripts/checkUsernames.php",
+          method:"POST",
+          data:{username:$("#register input[name=username]").val()}
+        }).done(function(r){
+          var json = JSON.parse(r);
+          console.log(json);
+          self.next().html(json.mensaje);
+
+          if(!json.estado){
+            $("#register input[type=submit]")[0].disabled="disabled";
+          }else{
+            $("#register input[type=submit]").removeAttr("disabled");       }
+        });
+      });
+      //ingresar usuarios
+      $("#register").submit(function(e){
+        e.preventDefault();
+        var username = $("#register input[name=username]").val();
+        var password = $("#register input[name=password]").val();
+
+        $.ajax({
+          url:"./php_scripts/signUp.php",
+          method:"POST",
+          data: {username: username, password: password}
+        }).done(function(r){
+          var r = JSON.parse(r);
+          alert(r.mensaje);
+          if(r.estado){
+            location.href = "./tienda.php";
+          }
+        });
+
+      });
+      
+  });
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
